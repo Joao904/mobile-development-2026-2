@@ -15,9 +15,11 @@ Estudantes com pouco tempo disponível podem adiar o estudo por não saberem com
 
 ## Versão desta branch
 
-Sprint 05: no plano, o botão Salvar no histórico grava a sessão em um banco local (Room). A tela inicial mostra Seu histórico, com as sessões mais recentes e os totais, que continuam disponíveis depois de fechar e abrir o app.
+Sprint 06: o estudante digita quantos minutos vai estudar (de 5 a 180, com atalhos de 15, 25, 45 e 60). No plano, o botão Avisar quando acabar pede a permissão de notificação e agenda, com o WorkManager, um aviso para o fim da sessão, que chega mesmo com o app fechado. Se a permissão for negada, o app explica e oferece abrir as configurações.
 
-O escopo até a sprint 5 é apresentar o aplicativo, selecionar a duração, informar assunto e objetivo, consultar o plano e salvar as sessões no histórico. Cronômetro, edição e exclusão de sessões, login e integrações externas ficam fora desta entrega.
+Também na Sprint 06: cronômetro em regressiva no plano (Começar, Pausar, Continuar e Recomeçar), com o aviso de fim acompanhando o cronômetro; meta da semana na tela inicial; exclusão de sessões do histórico, com Desfazer; e Ver todas, para listar mais que as 5 sessões recentes.
+
+O escopo até a sprint 6 é apresentar o aplicativo, informar duração, assunto e objetivo, consultar o plano com cronômetro, salvar e excluir sessões do histórico, acompanhar a meta da semana e receber o aviso de fim da sessão. Edição de sessões, sincronização e login ficam fora desta entrega.
 
 ## Executar
 
@@ -45,14 +47,15 @@ A partir de `app/`, no PowerShell:
 | 01 | [Relatório](SPRINT-01.md) | [PR #20](https://github.com/brenofeliix/mobile-development-2026-2/pull/20) |
 | 02 | [Relatório](SPRINT-02.md) | [PR #21](https://github.com/brenofeliix/mobile-development-2026-2/pull/21) |
 | 03 | [Relatório](SPRINT-03.md) | [PR #22](https://github.com/brenofeliix/mobile-development-2026-2/pull/22) |
-| 04 | [Relatório](SPRINT-04.md) | `team-09/sprint-04` |
-| 05 | [Relatório](SPRINT-05.md) | `team-09/sprint-05` |
+| 04 | [Relatório](SPRINT-04.md) | [PR #41](https://github.com/brenofeliix/mobile-development-2026-2/pull/41) |
+| 05 | [Relatório](SPRINT-05.md) | [PR #42](https://github.com/brenofeliix/mobile-development-2026-2/pull/42) |
+| 06 | [Relatório](SPRINT-06.md) | [PR #45](https://github.com/brenofeliix/mobile-development-2026-2/pull/45) |
 
 Cada relatório reúne a especificação, as decisões de implementação, os resultados de validação e as evidências do respectivo incremento.
 
 ## Uso de IA
 
-Sprints 00 a 03: utilizamos o Codex na especificação, geração de código, configuração, depuração, testes e documentação. Sprints 04 e 05: utilizamos o Claude (Claude Code) para as mesmas tarefas. A validação incluiu compilação, execução no emulador, testes instrumentados e capturas de tela.
+Sprints 00 a 03: utilizamos o Codex na especificação, geração de código, configuração, depuração, testes e documentação. Sprints 04 a 06: utilizamos o Claude (Claude Code) para as mesmas tarefas. A validação incluiu compilação, execução no emulador, testes instrumentados e capturas de tela.
 
 ## Referências
 
