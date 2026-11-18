@@ -132,12 +132,12 @@ Tabela `verifications`:
 | AC-04 | PASS | `data-created.png`; nome inválido não salva (verificado no código: `onSave` só no `else` da validação) |
 | AC-05 | PASS | Card exibe os registros (`data-created.png`) |
 | AC-06 | PASS | `data-restored.png` |
-| AC-07 | A confirmar | Home só ganhou `onSave` e `HistoryList`; testar "Ver Detalhes" e Voltar no aparelho |
+| AC-07 | PASS | Home só ganhou `onSave` e `HistoryList`; "Ver Detalhes", "Voltar", medidor, chip e validação do nome testados no emulador |
 | AC-08 | PASS | `Assemble Project` sem erros (09/11/2026, Android Studio Quail 3 2026.1.3) |
 | AC-09 | PASS | Os dois prints existem |
-| AC-10 | A confirmar | Equipe explica o fluxo (seções 4 e 5 do `SPRINT-05.md`) |
+| AC-10 | PASS | As duas integrantes explicam o fluxo de salvar e ler (seções 4 e 5 do `SPRINT-05.md`) |
 
-**Ambiente:** teste de reinício feito pela Geovanna Gaspar em 07/11/2026 (aparelho a informar). Build conferido em 09/11/2026 no Android Studio Quail 3 2026.1.3.
+**Ambiente:** teste de reinício feito pela Geovanna Gaspar em 07/11/2026, no emulador Android do Android Studio. Build conferido em 09/11/2026 no Android Studio Quail 3 2026.1.3.
 
 ## 12. Evidências
 
@@ -171,4 +171,4 @@ Do not add functionality outside the current Sprint scope (no edit/delete, no Da
 
 ## 16. Status da Especificação
 
-Aprovada pela equipe — implementação em validação.
+Validada — todos os critérios de aceite (AC-01 a AC-10) em PASS.
