@@ -103,24 +103,26 @@ O resultado de cada passo é registrado em `evidence/sprint-07/final-validation.
 
 ## 11. Resultados da Validação
 
-> A coluna "Resultado" só é preenchida depois que o roteiro da seção 10 for executado no app final. Enquanto isso fica **A executar**.
+Roteiro executado pela Geovanna Gaspar em 18/11/2026 no app final (branch `team-03/sprint-07`). Detalhes de cada passo em `evidence/sprint-07/final-validation.md`.
 
 | AC | Resultado | Observação |
 | --- | --- | --- |
 | AC-01 | PASS | SPEC-007 existe |
-| AC-02 | A executar | Revisão das SPECs 001 a 007 no `SPRINT-07.md` |
-| AC-03 | A executar | Roteiro, passos 1 e 2 |
-| AC-04 | A executar | Roteiro, passos 5 e 8 |
-| AC-05 | A executar | Roteiro, passo 3 |
-| AC-06 | A executar | Roteiro, passo 4 |
-| AC-07 | A executar | Roteiro, passo 6 |
-| AC-08 | A executar | Roteiro, passos 3 e 7 |
-| AC-09 | A executar | Roteiro, passo 9 |
-| AC-10 | A executar | Depende dos prints finais |
-| AC-11 | A executar | README criado; falta revisão final |
-| AC-12 | A executar | Conferir a lista de arquivos do PR |
-| AC-13 | A executar | Tabela da seção 8 |
-| AC-14 | A executar | Treino da apresentação |
+| AC-02 | PASS | SPECs 001 a 007 revisadas na tabela da seção 2 do `SPRINT-07.md` |
+| AC-03 | PASS | Roteiro, passos 1 e 2 (`final-home.png`) |
+| AC-04 | PASS | Roteiro, passos 5 e 8 |
+| AC-05 | PASS | Roteiro, passo 3 (`final-feature.png`) |
+| AC-06 | PASS | Roteiro, passo 4 |
+| AC-07 | PASS | Roteiro, passo 6: o histórico manteve os registros de 07/11 e 18/11 |
+| AC-08 | PASS | Roteiro, passos 3 e 7 |
+| AC-09 | PASS | Roteiro, passo 9: nenhum crash |
+| AC-10 | PASS | `final-home.png`, `final-feature.png` e `final-validation.md` |
+| AC-11 | PASS | `README.md` com todos os itens pedidos |
+| AC-12 | PASS | Nenhum `.idea/`, `.gradle/`, `build/`, `local.properties` ou segredo entre os arquivos versionados |
+| AC-13 | PASS | Tabela da seção 8 (requisito → código → evidência) |
+| AC-14 | PASS | As duas integrantes confirmaram que conseguem explicar o projeto |
+
+**Ambiente:** emulador Pixel 8 do Android Studio, Android 15 (API 35).
 
 ## 12. Evidências
 
@@ -138,4 +140,4 @@ Ferramenta: Claude (Anthropic). Uso: revisão das SPECs anteriores, geração do
 
 ## 15. Status da Especificação
 
-Em validação — os resultados da seção 11 serão preenchidos depois da regressão no app final.
+Validada — todos os critérios de aceite (AC-01 a AC-14) em PASS.
