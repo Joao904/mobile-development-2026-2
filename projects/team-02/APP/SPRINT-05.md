@@ -18,7 +18,7 @@ Salvar os dados do usuário no aparelho e recuperá-los quando o TreinePlus for 
 Perfil completo, treinos do usuário, agenda semanal, histórico de sessões, registros de peso, água do dia (zera ao mudar o dia) e favoritos.
 
 ## Mudança em relação ao planejado
-A apresentação previa Preferences DataStore para 4 valores do perfil. O código usa SharedPreferences e guarda muito mais dados. A equipe precisa decidir entre migrar para DataStore ou atualizar a apresentação.
+A apresentação previa Preferences DataStore para 4 valores do perfil. O código usa SharedPreferences e guarda muito mais dados.
 
 ## Critérios de aceite
 | CA | Descrição | Situação no código | Execução Android |
@@ -36,7 +36,7 @@ A apresentação previa Preferences DataStore para 4 valores do perfil. O códig
 | CA-11 | Teste de fechar e reabrir evidenciado | Implementado | RUN |
 
 ## Evidências
-Registrar em `evidence/sprint-05/` capturas antes e depois de fechar o app pela lista de recentes e reabrir.
+Evidências na pasta images -> projects/team-02/APP/images.
 
 ## Resultado e pendências
 - Testes Realizados e registrados resultados esperados.
