@@ -89,7 +89,7 @@ O `Repositorio` concentra leitura e gravação. Listas usam a função genérica
 
 
 ## 12. Uso de IA
-Esta revisão foi feita com apoio de IA (Claude), comparando a SPEC com o código. A equipe deve revisar as chaves, o fluxo de dados e o tratamento de falhas.
+Esta revisão foi feita com apoio de IA (Claude), comparando a SPEC com o código.
 
 ## 13. Entregáveis
 `Repositorio` com SharedPreferences, SPEC-005, `SPRINT-05.md` e evidências reais de reinício em `evidence/sprint-05/`.
