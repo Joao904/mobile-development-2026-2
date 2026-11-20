@@ -38,5 +38,8 @@ Cadastrar e editar o perfil do usuário, impedindo o salvamento de dados inváli
 | CA-11 | Edição vem preenchida | Implementado | RUN |
 | CA-12 | Evidências de válido e inválido | Implementado | RUN |
 
+## 14. Uso de IA
+Foi utilizado a IA (Claude), para correção de erros e revisão.
+
 ## Evidências
 Evidências na pasta images -> projects/team-02/APP/images.
