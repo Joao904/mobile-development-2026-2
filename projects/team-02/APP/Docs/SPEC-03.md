@@ -80,7 +80,13 @@ Rotas centralizadas no objeto `Rotas`, com funções auxiliares `detalhe(id)`, `
 ## 12. Resultados da validação
 | Passo | Resultado | Observação |
 |---|---|---|
-| 1 a 7 | RUN | Preencher após execução no Android Studio (emulador ou dispositivo), registrando modelo e versão do Android. |
+| 1  | RUN | Passou |
+| 2  | RUN | Passou |
+| 3  | RUN | Passou |
+| 4  | RUN | Passou |
+| 5  | RUN | Passou |
+| 6  | RUN | Passou |
+| 7  | RUN | Passou |
 
 ## 13. Riscos e observações
 - **Mudança em relação à apresentação:** o fluxo linear de sete destinos foi substituído por abas inferiores e rotas por `id`. As rotas `modalidade`, `foco/{mod}`, `semana/{mod}`, `dia/{mod}/{indice}`, `treino/{mod}/{indice}` e `dieta/{indice}` não existem no código.
