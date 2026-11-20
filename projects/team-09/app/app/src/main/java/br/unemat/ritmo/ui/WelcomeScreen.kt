@@ -7,22 +7,38 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import br.unemat.ritmo.data.HistorySummary
+import br.unemat.ritmo.data.StudySession
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun WelcomeScreen(
-    selectedMinutes: Int,
-    onSelect: (Int) -> Unit,
+    minutesText: String,
+    onMinutesChange: (String) -> Unit,
+    subject: String,
+    goal: String,
+    showErrors: Boolean,
+    onSubjectChange: (String) -> Unit,
+    onGoalChange: (String) -> Unit,
     onPlan: () -> Unit,
+    summary: HistorySummary,
+    sessions: List<StudySession>,
+    weekMinutes: Int,
+    weeklyGoal: Int,
+    onWeeklyGoalChange: (Int) -> Unit,
+    onDelete: (StudySession) -> Unit,
+    snackbarHostState: SnackbarHostState,
     modifier: Modifier = Modifier
 ) {
-    Scaffold(containerColor = Paper) { padding ->
+    Scaffold(containerColor = Paper, snackbarHost = { SnackbarHost(snackbarHostState) }) { padding ->
         Column(
-            modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(24.dp),
+            modifier.fillMaxSize().padding(padding).imePadding().verticalScroll(rememberScrollState()).padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             Brand()
@@ -33,11 +49,28 @@ fun WelcomeScreen(
                     style = MaterialTheme.typography.bodyLarge, color = Muted)
             }
             FocusCard()
-            DurationPicker(selectedMinutes = selectedMinutes, onSelect = onSelect)
-            Button(onClick = onPlan, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(18.dp)) {
+            DurationPicker(minutesText = minutesText, showErrors = showErrors, onMinutesChange = onMinutesChange)
+            SessionForm(
+                subject = subject,
+                goal = goal,
+                showErrors = showErrors,
+                onSubjectChange = onSubjectChange,
+                onGoalChange = onGoalChange
+            )
+            val focusManager = LocalFocusManager.current
+            // Clearing focus closes the keyboard before validating/navigating.
+            Button(onClick = { focusManager.clearFocus(); onPlan() }, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(18.dp)) {
                 Text("Planejar meu estudo", style = MaterialTheme.typography.titleMedium)
             }
             Text("Seu tempo. Seu próximo passo.", style = MaterialTheme.typography.labelMedium, color = Muted)
+            HistorySection(
+                summary = summary,
+                sessions = sessions,
+                weekMinutes = weekMinutes,
+                weeklyGoal = weeklyGoal,
+                onGoalChange = onWeeklyGoalChange,
+                onDelete = onDelete
+            )
         }
     }
 }
@@ -74,4 +107,14 @@ private fun FocusCard() {
 
 @Preview(showBackground = true)
 @Composable
-private fun WelcomePreview() { RitmoTheme { WelcomeScreen(25, {}, {}) } }
+private fun WelcomePreview() {
+    RitmoTheme {
+        WelcomeScreen(
+            "25", {}, "Cálculo I", "", false, {}, {}, {},
+            summary = HistorySummary(1, 25),
+            sessions = listOf(StudySession(1, "Cálculo I", "resolver 5 exercícios", 25, 0L)),
+            weekMinutes = 25, weeklyGoal = 300, onWeeklyGoalChange = {}, onDelete = {},
+            snackbarHostState = remember { SnackbarHostState() }
+        )
+    }
+}
