@@ -4,7 +4,7 @@
 > **Integrantes:** Paulo Eduardo de Leon Fernandes Alves; Pedro Gustavo Macena da Silva  
 > **Sprint:** 05  
 > **Status:** Implementada no código Android com **SharedPreferences + JSON** (não DataStore). Teste de fechar e reabrir o app pendente de registro.  
-> **Última revisão:** 20/11/2026 — atualizada a partir do código-fonte (`Repositorio.kt`, `AppViewModel.kt`).
+> **Última revisão:** 20/11/2026
 
 ## 1. Contexto
 Depois de cadastrar o perfil, montar treinos e registrar sessões, o usuário espera encontrar tudo igual ao fechar e reabrir o TreinePlus. A apresentação previa Preferences DataStore apenas para quatro valores do perfil. A implementação passou a guardar também treinos próprios, agenda, histórico, pesos, água e favoritos.
