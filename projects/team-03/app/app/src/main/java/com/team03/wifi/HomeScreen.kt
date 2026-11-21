@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -32,19 +31,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.team03.wifi.data.MeasureState
 import com.team03.wifi.data.Verification
 import kotlin.math.cos
 import kotlin.math.sin
-import kotlin.random.Random
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    onSeeDetails: (SignalStatus) -> Unit,
+    onSeeDetails: (SignalStatus, Int) -> Unit,
     history: List<Verification> = emptyList(),
-    onSave: (String, SignalStatus) -> Unit = { _, _ -> }
+    measureState: MeasureState = MeasureState.Idle,
+    onMeasure: (String) -> Unit = {}
 ) {
-    var signalStatus by rememberSaveable { mutableStateOf(SignalStatus.NONE) }
+    // Sprint 06: o status agora vem da medição real, não de um sorteio
+    val sucesso = measureState as? MeasureState.Success
+    val signalStatus = sucesso?.status ?: SignalStatus.NONE
+    val medindo = measureState is MeasureState.Loading
+    // rememberSaveable: o nome continua no campo ao voltar de "Ver Detalhes" (Sprint 03/04)
     var roomName by rememberSaveable { mutableStateOf("") }
     var roomError by rememberSaveable { mutableStateOf(false) }
 
@@ -108,7 +112,7 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            SignalGauge(status = signalStatus)
+            SignalGauge(status = signalStatus, dbm = sucesso?.dbm)
 
             Spacer(modifier = Modifier.height(12.dp))
 
@@ -120,7 +124,7 @@ fun HomeScreen(
                     .padding(horizontal = 22.dp, vertical = 9.dp)
             ) {
                 Text(
-                    text = signalStatus.label,
+                    text = if (medindo) "Medindo..." else signalStatus.label,
                     color = signalStatus.color,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold
@@ -161,28 +165,41 @@ fun HomeScreen(
                         roomError = true
                     } else {
                         roomError = false
-                        val novoStatus = SignalStatus.entries
-                            .filter { it != SignalStatus.NONE }
-                            .random(Random(System.nanoTime()))
-                        signalStatus = novoStatus
-                        onSave(roomName.trim(), novoStatus) // Sprint 05: salva no banco
+                        onMeasure(roomName.trim()) // Sprint 06: mede o Wi-Fi e salva
                     }
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan, contentColor = Color.Black),
+                enabled = !medindo,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = AccentCyan,
+                    contentColor = Color.Black,
+                    disabledContainerColor = AccentCyan.copy(alpha = 0.4f),
+                    disabledContentColor = Color.Black
+                ),
                 shape = RoundedCornerShape(18.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(58.dp)
                     .shadow(24.dp, RoundedCornerShape(18.dp), ambientColor = AccentCyan, spotColor = AccentCyan)
             ) {
-                Text("▶  Iniciar Verificação", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                Text(if (medindo) "Medindo sinal..." else "▶  Iniciar Verificação", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            }
+
+            // Estado de erro da integração (Sprint 06)
+            if (measureState is MeasureState.Error) {
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = measureState.message,
+                    color = Color(0xFFF0495A),
+                    fontSize = 14.sp,
+                    textAlign = TextAlign.Center
+                )
             }
 
             // Navegação (Sprint 03)
-            if (signalStatus != SignalStatus.NONE) {
+            if (sucesso != null) {
                 Spacer(modifier = Modifier.height(12.dp))
                 Button(
-                    onClick = { onSeeDetails(signalStatus) },
+                    onClick = { onSeeDetails(sucesso.status, sucesso.dbm) },
                     colors = ButtonDefaults.buttonColors(containerColor = SurfaceDark, contentColor = AccentCyan),
                     shape = RoundedCornerShape(18.dp),
                     modifier = Modifier.fillMaxWidth().height(48.dp)
@@ -202,7 +219,7 @@ fun HomeScreen(
 
 // Medidor circular: marcas ao redor + arco proporcional à intensidade
 @Composable
-private fun SignalGauge(status: SignalStatus) {
+private fun SignalGauge(status: SignalStatus, dbm: Int?) {
     Box(modifier = Modifier.size(280.dp), contentAlignment = Alignment.Center) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             val center = Offset(size.width / 2f, size.height / 2f)
@@ -223,8 +240,8 @@ private fun SignalGauge(status: SignalStatus) {
             }
 
             // Arco: -100 dBm = vazio, -40 dBm = volta completa
-            if (status != SignalStatus.NONE) {
-                val fraction = ((status.dbm + 100) / 60f).coerceIn(0f, 1f)
+            if (dbm != null) {
+                val fraction = ((dbm + 100) / 60f).coerceIn(0f, 1f)
                 val arcRadius = outer - 28.dp.toPx()
                 drawArc(
                     color = status.color,
@@ -251,12 +268,12 @@ private fun SignalGauge(status: SignalStatus) {
             Spacer(modifier = Modifier.height(12.dp))
             Row(verticalAlignment = Alignment.Bottom) {
                 Text(
-                    text = if (status == SignalStatus.NONE) "—" else "${status.dbm}",
+                    text = dbm?.toString() ?: "—",
                     color = status.color,
                     fontSize = 52.sp,
                     fontWeight = FontWeight.Bold
                 )
-                if (status != SignalStatus.NONE) {
+                if (dbm != null) {
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
                         text = "dBm",
