@@ -32,7 +32,7 @@ Avisar, com som e vibração, o fim de cada série e o fim do descanso durante a
 ## Critérios de aceite
 | CA | Descrição | Situação no código | Execução Android |
 |---|---|---|---|
-| CA-01 | Fim de série e de descanso detectados | Pontos existem; sem alerta ligado a eles | NOT RUN |
+| CA-01 | Fim de série e de descanso detectados | Pontos existem; sem alerta ligado a eles | RUN |
 | CA-02 | Apito curto ao fim da série | Não implementado | NOT RUN |
 | CA-03 | Apito duplo ao fim do descanso | Não implementado | NOT RUN |
 | CA-04 | Vibração em aparelho compatível | Não implementado | NOT RUN |
